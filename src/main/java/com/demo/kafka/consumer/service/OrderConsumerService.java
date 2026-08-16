@@ -20,9 +20,10 @@ public class OrderConsumerService {
 		try {
 			log.info("Consume order event orderId={} customerId={} partition={} offset={}", event.orderId(), event.customerId(), record.partition(), record.offset());
 			processOrder(event);
+			ack.acknowledge();
 		}
 		catch(Exception e) {
-			log.error(""+e.getMessage());
+			log.error("Processing failed for orderId={}, delegating to error handler"+event.orderId());
 			throw e;
 		}
 	}

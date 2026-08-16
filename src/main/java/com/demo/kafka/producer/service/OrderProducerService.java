@@ -18,7 +18,7 @@ public class OrderProducerService {
 	
 	private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
 	private final String topic;
-	public OrderProducerService(KafkaTemplate<String, OrderEvent> kafkaTemplate,@Value("${app.kafka.topic.orders}") String topic) {
+	public OrderProducerService(KafkaTemplate<String, OrderEvent> kafkaTemplate, @Value("${app.kafka.topic.orders}") String topic) {
 		this.kafkaTemplate = kafkaTemplate;
 		this.topic = topic;
 	}
