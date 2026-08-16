@@ -1,0 +1,39 @@
+spring:
+   application:
+      name: kafka-implementation
+   kafka:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      
+app:
+   kafka:
+      topic:
+         orders: orders.events
+         orders-dlt: orders.events.DLT
+         partitions: 3
+         replication-factor: 1
+      consumer:
+         group-id: kafka-order-consumer
+         concurrency: 3
+
+management:
+   endpoints:
+      web:
+         exposure:
+            include: health,info,metrics,prometheus
+   endpoint:
+      health:
+         probes:
+            enabled: true
+   health:
+      livenessstate:
+         enabled: true
+      readinessstate:
+         enabled: true
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
+  level:
+    org.apache.kafka: WARN
+    org.springframework.kafka: INFO
+    com.example.kafkademo: INFO     
